@@ -2,6 +2,7 @@
 #include <string>
 #include <map>
 #include <iostream>
+#include <bitset>
 
 using namespace std;
 
@@ -54,17 +55,56 @@ class Solution {
     }
     return str;
   }
+
+  /*
+	The Hamming distance between two integers is the number of positions at which the corresponding bits are different.
+
+	Given two integers x and y, calculate the Hamming distance.
+
+	Note:
+	0 ≤ x, y < 231.
+
+	Example:
+	Input: x = 1, y = 4
+
+	Output: 2
+
+	Explanation:
+	1   (0 0 0 1)
+	4   (0 1 0 0)
+  */
+  int Hamming_Distance(int x, int y) {
+    int hamming_distance = 0;
+    int result_xor = x ^ y;
+ 
+    bitset<8> x_binary(x);
+    bitset<8> y_binary(y);
+    bitset<8> result_xor_binary(result_xor);
+    cout<<"x_binary = "<<x_binary<<endl;
+    cout<<"y_binary = "<<y_binary<<endl;
+    cout<<"xor_binary = "<<result_xor_binary<<endl;
+
+    while (result_xor > 0) {
+      result_xor &= (result_xor - 1);
+      ++hamming_distance;
+    }
+
+    cout<<"hamming distance = "<<hamming_distance<<endl;
+    return hamming_distance;
+  }
 };
 
 int main(int argc, char* argv[]) {
+  Solution solution;
+  solution.Hamming_Distance(1, 4);
+/*
   vector<string> strs;
   
-  /*
-  strs.push_back("lint");
-  strs.push_back("intl");
-  strs.push_back("inlt");
-  strs.push_back("code");
-  */
+  //strs.push_back("lint");
+  //strs.push_back("intl");
+  //strs.push_back("inlt");
+  //strs.push_back("code");
+  
   strs.push_back("ab");
   strs.push_back("ba");
   strs.push_back("cd");
@@ -79,6 +119,6 @@ int main(int argc, char* argv[]) {
     cout<<anagrams[i]<<endl;
   }
   cout<<"}"<<endl;
-
+*/
   return 0;
 }
